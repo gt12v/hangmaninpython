@@ -1,0 +1,37 @@
+import random
+import tkinter as tk
+from tkinter import messagebox
+
+# Dictionary of word categories
+categories = {
+    "Animals": ["elephant", "giraffe", "lion", "tiger", "zebra"],
+    "Fruits": ["apple", "banana", "cherry", "grape", "watermelon"],
+    "Countries": ["america", "canada", "france", "india", "japan"]
+}
+
+# Function to choose a random word from the selected category
+def choose_word(category):
+    return random.choice(categories[category])
+
+# Function to play the game
+def hangman():
+    category = category_var.get()
+    word = choose_word(category)
+    guessed_letters = []
+    attempts = 6  # Number of allowed incorrect guesses
+
+    # Create the hangman GUI window
+    hangman_window = tk.Toplevel(root)
+    hangman_window.title("Hangman")
+
+    canvas = tk.Canvas(hangman_window, width=200, height=250)
+    canvas.pack()
+
+    # Initialize hangman stages
+    stages = [
+        canvas.create_line(20, 230, 80, 230),
+        canvas.create_line(50, 230, 50, 50),
+        canvas.create_line(50, 50, 150, 50),
+        canvas.create_line(150, 50, 150, 75),
+        canvas.create_oval(135, 75, 165, 105),
+        canvas.create_line(150, 105, 150, 170),
